@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+*/node_modules/
+venv/
+*/venv/
+.env
+*.env
+.env.local
+
+# Build outputs
+dist/
+*/dist/
+build/
+*.egg-info/
+
+# Python cache
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*/.pytest_cache/
+
+# Data and cached cloned repositories
+data/
+backend/data/
+cloned_repos/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+

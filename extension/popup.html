@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>RepoRAG Extension</title>
+  <style>
+    body {
+      width: 320px;
+      margin: 0;
+      padding: 16px;
+      background: #090a0f;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .logo {
+      font-family: monospace;
+      font-weight: bold;
+      color: #00f2fe;
+      font-size: 16px;
+    }
+    .title {
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .tagline {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #090a0f;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 8px;
+    }
+    .btn-secondary {
+      background: #1e2235;
+      color: #f1f5f9;
+      border: 1px solid #2e344e;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="logo">&lt;◉&gt;</span>
+    <span class="title">RepoRAG</span>
+  </div>
+  <div class="tagline">Understand Any Repository. Ask Anything.</div>
+  <button class="btn" id="open-panel-btn">Open Chrome Side Panel</button>
+  <button class="btn btn-secondary" id="open-dash-btn">Open Web Dashboard</button>
+
+  <script>
+    document.getElementById('open-panel-btn').addEventListener('click', () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (chrome.sidePanel && chrome.sidePanel.open && tabs[0]?.windowId) {
+          chrome.sidePanel.open({ windowId: tabs[0].windowId });
+        }
+      });
+    });
+    document.getElementById('open-dash-btn').addEventListener('click', () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const url = tabs[0]?.url || "";
+        window.open(`http://localhost:5173?repo=${encodeURIComponent(url)}`, '_blank');
+      });
+    });
+  </script>
+</body>
+</html>
